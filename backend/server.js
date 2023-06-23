@@ -1,8 +1,10 @@
 const express=require("express");
 const path=require("path");
+require("dotenv").config();
+
 
 const app=express();
-const port= process.env.PORT || 8000;
+const port= process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -56,8 +58,9 @@ async function quickstart() {
 const { Configuration, OpenAIApi } = require("openai");
 const { contains } = require("jquery");
 
+console.log(`${process.env.OpenAIApi}`);
 const configuration = new Configuration({
-  apiKey: "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",
+  apiKey: `${process.env.OpenAIApi}`,
 });
 const openai = new OpenAIApi(configuration);
 
@@ -71,10 +74,13 @@ const runPrompt= async() => {
         temperature:1,   
         });
         console.log(Prompt);
+       
         console.log(completion.data.choices[0].text);
         answer=completion.data.choices[0].text;
     } catch (error) {
-        if (error.response) {
+          
+          if (error.response) {
+            console.log(error);
             console.log(error.response.status);
             answer=(error.response.data);
         } else {
@@ -101,6 +107,7 @@ app.post('/',async function(req,res){
 console.log("HIi");
 console.log(__dirname);
 const filename=path.resolve();
+console.log(filename);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(filename, '/frontend/build')))
