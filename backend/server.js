@@ -2,7 +2,7 @@ const express=require("express");
 const path=require("path");
 
 const app=express();
-const PORT=process.env.PORT|| 5000;
+const port= process.env.PORT || 8000;
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -96,17 +96,10 @@ app.post('/',async function(req,res){
 });
 
 ///Text to speech
+///using say library in node.js
 
-const say = require('say');
- 
- 
-// Use default system voice and speed
-say.speak('Hello!')
- 
-// Stop the text currently being spoken
-say.stop()
-
-const __dirname=path.resolve();
+console.log("HIi");
+console.log(__dirname);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '/frontend/build')))
@@ -120,6 +113,6 @@ if (process.env.NODE_ENV === 'production') {
     })
 }
 
-app.listen(PORT,function(req,res){
+app.listen(port, async function(req,res){
     console.log("listenning");
 })
