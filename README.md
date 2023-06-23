@@ -2,7 +2,7 @@
 
 Live at https://gpt-audio-web-app-64b6.onrender.com/
 
-Add your own openAI API
+Add your own openAI API key
 
 Functionalities:
 
